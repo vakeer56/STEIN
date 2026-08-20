@@ -1,0 +1,11 @@
+{
+  "name": "stein-app",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "postinstall": "npm install --prefix client && npm install --prefix server",
+    "build": "npm run build --prefix client",
+    "start": "NODE_ENV=production node server/index.js"
+  }
+}

@@ -86,11 +86,9 @@ function Sidebar() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-base font-extrabold tracking-tight text-slate-900">
-              STEIN
+              Chakravyu
             </h1>
-            <span className="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-50 border border-blue-200 text-blue-700">
-              POLICE
-            </span>
+
           </div>
           <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
             Cyber Threat Intel
@@ -160,7 +158,6 @@ function TopBar() {
     <header className="h-14 bg-white border-b border-slate-200 flex items-center justify-between px-6 fixed top-0 left-64 right-0 z-20 shadow-sm">
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 tracking-wider">
-          <Activity className="w-3.5 h-3.5 text-blue-600" />
           <span>{t('topbarTitle')}</span>
         </div>
       </div>
@@ -169,9 +166,9 @@ function TopBar() {
         {/* Language Toggler Control (English / Hindi / Punjabi) */}
         <div className="flex items-center p-0.5 bg-slate-100 border border-slate-200 rounded-lg text-xs font-semibold">
           {[
-            { id: 'en', label: '🇬🇧 EN' },
-            { id: 'hi', label: '🇮🇳 हिंदी' },
-            { id: 'pa', label: '🌾 ਪੰਜਾਬੀ' },
+            { id: 'en', label: 'EN' },
+            { id: 'hi', label: 'हिंदी' },
+            { id: 'pa', label: 'ਪੰਜਾਬੀ' },
           ].map((item) => (
             <button
               key={item.id}

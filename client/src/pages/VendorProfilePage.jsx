@@ -58,7 +58,7 @@ export default function VendorProfilePage() {
             <div style="display: flex; align-items: center; gap: 16px;">
               <img src="/Chandigarh_Police_Logo.png" style="width: 52px; height: 52px; object-fit: contain; background: #ffffff; padding: 3px; border-radius: 10px; border: 1px solid #60a5fa;" alt="Chandigarh Police Logo" />
               <div>
-                <div style="font-size: 20px; font-weight: 900; letter-spacing: -0.02em; text-transform: uppercase;">STEIN POLICE CYBER THREAT DIVISION</div>
+                <div style="font-size: 20px; font-weight: 900; letter-spacing: -0.02em; text-transform: uppercase;">Chakravyu POLICE CYBER THREAT DIVISION</div>
                 <div style="font-size: 11px; color: #93c5fd; font-weight: 700; text-transform: uppercase; margin-top: 3px; letter-spacing: 0.05em;">CHANDIGARH POLICE ANTI-NARCOTICS &amp; CYBER CRIME CELL</div>
               </div>
             </div>

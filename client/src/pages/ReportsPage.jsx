@@ -102,7 +102,7 @@ export default function ReportsPage() {
           <!-- Header Banner -->
           <div style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: #ffffff; padding: 20px 24px; border-radius: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
             <div>
-              <div style="font-size: 18px; font-weight: 800; letter-spacing: -0.02em;">STEIN POLICE CYBER THREAT DIVISION</div>
+              <div style="font-size: 18px; font-weight: 800; letter-spacing: -0.02em;">Chakravyu POLICE CYBER THREAT DIVISION</div>
               <div style="font-size: 11px; color: #93c5fd; font-weight: 600; text-transform: uppercase; margin-top: 2px;">Official Law Enforcement Evidence Dossier</div>
             </div>
             <div style="background: #ef4444; color: #ffffff; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; font-family: monospace;">RESTRICTED</div>

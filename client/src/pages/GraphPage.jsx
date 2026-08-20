@@ -75,7 +75,6 @@ export default function GraphPage() {
           </div>
 
           <button onClick={handleSeed} disabled={seeding || loading} className="stein-btn-primary text-xs">
-            <Sparkles className={`w-3.5 h-3.5 ${seeding ? 'animate-spin' : ''}`} />
             <span>{seeding ? 'Initializing...' : 'Initialize Graph Data'}</span>
           </button>
           <button onClick={fetchGraph} className="stein-btn-secondary text-xs">
