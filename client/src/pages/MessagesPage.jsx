@@ -24,7 +24,10 @@ import {
   Code2,
 } from 'lucide-react';
 
+import { useLanguage } from '../i18n/LanguageContext';
+
 export default function MessagesPage() {
+  const { t } = useLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedVendorFilter = searchParams.get('vendor') || '';
 
@@ -104,10 +107,10 @@ export default function MessagesPage() {
         <div>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
             <MessageSquareText className="w-6 h-6 text-blue-600" />
-            <span>Ingested Messages Triage</span>
+            <span>{t('msgTitle')}</span>
           </h1>
           <p className="text-slate-500 text-xs mt-1 font-medium">
-            Real-time rule engine &amp; zero-shot classifier triage queue
+            {t('msgSubtitle')}
           </p>
         </div>
 
@@ -132,10 +135,10 @@ export default function MessagesPage() {
               onChange={(e) => setFilter(e.target.value)}
               className="bg-slate-50 border border-slate-300 text-slate-800 text-xs font-semibold rounded-lg pl-9 pr-8 py-2 focus:outline-none focus:border-blue-600 cursor-pointer"
             >
-              <option value="">All Classifications</option>
-              <option value="SUSPICIOUS">Suspicious Only</option>
-              <option value="NEEDS_REVIEW">Needs Review</option>
-              <option value="BENIGN">Benign</option>
+              <option value="">{t('allClassifications')}</option>
+              <option value="SUSPICIOUS">{t('suspiciousOnly')}</option>
+              <option value="NEEDS_REVIEW">{t('needsReview')}</option>
+              <option value="BENIGN">{t('benignOnly')}</option>
             </select>
           </div>
         </div>
@@ -146,7 +149,7 @@ export default function MessagesPage() {
         <div className="flex items-center gap-2 border-b border-slate-200 pb-2.5">
           <Terminal className="w-4 h-4 text-blue-600" />
           <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-            Ingest Synthetic Test Message
+            {t('ingestFormTitle')}
           </h2>
         </div>
         <form onSubmit={handleManualIngest} className="flex flex-col md:flex-row gap-2">
@@ -154,7 +157,7 @@ export default function MessagesPage() {
             <User className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Sender (e.g. 'Vendor_Alpha')"
+              placeholder={t('senderPlaceholder')}
               value={authorSignature}
               onChange={(e) => setAuthorSignature(e.target.value)}
               className="w-full bg-slate-50 border border-slate-300 rounded-lg pl-8 pr-3 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 font-mono font-medium"
@@ -163,7 +166,7 @@ export default function MessagesPage() {
           <div className="relative flex-1">
             <input
               type="text"
-              placeholder="Enter raw message text..."
+              placeholder={t('msgPlaceholder')}
               value={manualText}
               onChange={(e) => setManualText(e.target.value)}
               className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 font-medium"
@@ -175,7 +178,7 @@ export default function MessagesPage() {
             ) : (
               <Send className="w-3.5 h-3.5" />
             )}
-            <span>{submitting ? 'Classifying...' : 'Ingest & Classify'}</span>
+            <span>{submitting ? '...' : t('ingestBtn')}</span>
           </button>
         </form>
       </div>
@@ -186,26 +189,26 @@ export default function MessagesPage() {
         <div className="grid grid-cols-12 gap-3 px-4 py-2.5 bg-slate-100 border border-slate-200 rounded-lg text-[10px] font-sans font-bold uppercase tracking-wider text-slate-600">
           <div className="col-span-1 flex items-center gap-1.5">
             <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
-            <span>SOURCE</span>
+            <span>{t('thSource')}</span>
           </div>
           <div className="col-span-2 flex items-center gap-1.5">
             <User className="w-3.5 h-3.5 text-blue-600" />
-            <span>VENDOR IDENTITY</span>
+            <span>{t('thVendor')}</span>
           </div>
           <div className="col-span-4 flex items-center gap-1.5">
             <MessageSquare className="w-3.5 h-3.5 text-blue-600" />
-            <span>MESSAGE CONTENT</span>
+            <span>{t('thMessageContent')}</span>
           </div>
           <div className="col-span-2 flex items-center gap-1.5">
             <ShieldAlert className="w-3.5 h-3.5 text-blue-600" />
-            <span>CLASSIFICATION &amp; RISK</span>
+            <span>{t('thRisk')}</span>
           </div>
           <div className="col-span-2 flex items-center gap-1.5">
             <Clock className="w-3.5 h-3.5 text-blue-600" />
-            <span>TIMESTAMP</span>
+            <span>{t('thTimestamp')}</span>
           </div>
           <div className="col-span-1 text-right">
-            <span>ACTION</span>
+            <span>{t('thAction')}</span>
           </div>
         </div>
 
@@ -318,7 +321,7 @@ export default function MessagesPage() {
                         }}
                         className="p-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 transition-colors flex items-center gap-1 text-[11px] font-semibold"
                       >
-                        <span>{isExpanded ? 'Hide' : 'Details'}</span>
+                        <span>{isExpanded ? t('btnHide') : t('btnDetails')}</span>
                         {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                       </button>
                     </div>
@@ -358,29 +361,71 @@ export default function MessagesPage() {
                         </div>
                       </div>
 
-                      {/* Signals & Contextual Reasons */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {(msg.classification?.reasons?.length > 0 || msg.encodingDetected) && (
-                          <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-900 space-y-1">
-                            <span className="font-bold text-amber-800 flex items-center gap-1.5 text-xs">
-                              <Lightbulb className="w-3.5 h-3.5 text-amber-600" />
-                              <span>Detected Contextual Signals</span>
-                            </span>
-                            <p className="text-[11px] text-amber-900 leading-relaxed font-mono">
-                              {msg.classification?.reasons?.join(' ') || (msg.classification?.signals ? msg.classification.signals.join(', ') : 'multilingual_expression.')}
-                            </p>
-                          </div>
-                        )}
+                      {/* Explainable AI: Why Flag Fired Panel (Light Enterprise Styling) */}
+                      <div className="p-4 bg-gradient-to-r from-blue-50/80 via-slate-50 to-indigo-50/80 border border-blue-200/90 rounded-xl space-y-3 shadow-sm">
+                        <div className="flex items-center justify-between border-b border-blue-200/80 pb-2.5">
+                          <span className="font-extrabold text-xs text-blue-900 flex items-center gap-2 uppercase tracking-wider">
+                            <Lightbulb className="w-4 h-4 text-blue-600 animate-pulse" />
+                            <span>EXPLAINABLE AI: WHY THIS FLAG FIRED</span>
+                          </span>
+                          <span className="font-mono text-[10px] text-blue-800 font-extrabold bg-white px-2.5 py-0.5 rounded-md border border-blue-200 shadow-2xs">
+                            RISK SCORE: {riskScore}/100
+                          </span>
+                        </div>
 
-                        {signals.length > 0 && (
-                          <div className="p-3 rounded-lg bg-blue-50 border border-blue-200 text-blue-900 space-y-1.5">
-                            <span className="font-bold text-blue-800 flex items-center gap-1.5 text-xs">
-                              <Activity className="w-3.5 h-3.5 text-blue-600" />
-                              <span>Extracted Heuristics &amp; Keywords</span>
+                        {/* Point Breakdown Badges */}
+                        <div className="flex flex-wrap gap-2 pt-0.5">
+                          {signals.includes('explicit_illicit_substance_reference') && (
+                            <span className="px-2.5 py-1 rounded-md bg-red-100 text-red-800 border border-red-300 font-mono text-[11px] font-bold flex items-center gap-1.5 shadow-2xs">
+                              <span className="w-2 h-2 rounded-full bg-red-600" />
+                              +40 Explicit Substance / Narcotics
                             </span>
-                            <div className="flex flex-wrap gap-1.5 pt-0.5">
+                          )}
+                          {signals.includes('regional_punjabi_hindi_slang') && (
+                            <span className="px-2.5 py-1 rounded-md bg-orange-100 text-orange-950 border border-orange-300 font-mono text-[11px] font-bold flex items-center gap-1.5 shadow-2xs">
+                              <span className="w-2 h-2 rounded-full bg-orange-600 animate-pulse" />
+                              +35 Regional Punjabi / Hindi Drug Slang
+                            </span>
+                          )}
+                          {(signals.includes('coded_product_reference') || signals.includes('slang_terminology')) && (
+                            <span className="px-2.5 py-1 rounded-md bg-amber-100 text-amber-900 border border-amber-300 font-mono text-[11px] font-bold flex items-center gap-1.5 shadow-2xs">
+                              <span className="w-2 h-2 rounded-full bg-amber-600" />
+                              +30 Coded Terminology / Regional Slang
+                            </span>
+                          )}
+                          {(signals.includes('private_contact_solicitation') || signals.includes('purchase_solicitation')) && (
+                            <span className="px-2.5 py-1 rounded-md bg-blue-100 text-blue-900 border border-blue-300 font-mono text-[11px] font-bold flex items-center gap-1.5 shadow-2xs">
+                              <span className="w-2 h-2 rounded-full bg-blue-600" />
+                              +20 Private Contact / DM Solicitation
+                            </span>
+                          )}
+                          {msg.extractedAddresses?.length > 0 && (
+                            <span className="px-2.5 py-1 rounded-md bg-purple-100 text-purple-900 border border-purple-300 font-mono text-[11px] font-bold flex items-center gap-1.5 shadow-2xs">
+                              <span className="w-2 h-2 rounded-full bg-purple-600" />
+                              +20 Crypto Payment Address Mention
+                            </span>
+                          )}
+                          {msg.encodingDetected && (
+                            <span className="px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-900 border border-emerald-300 font-mono text-[11px] font-bold flex items-center gap-1.5 shadow-2xs">
+                              <span className="w-2 h-2 rounded-full bg-emerald-600" />
+                              +10 Obfuscated Payload Decoded ({msg.encodingDetected})
+                            </span>
+                          )}
+                        </div>
+
+                        {/* AI Contextual Summary */}
+                        <div className="p-3 bg-white border border-blue-200/80 rounded-lg text-slate-800 text-xs leading-relaxed font-sans shadow-2xs">
+                          <strong className="text-blue-950 font-bold">AI Reasoning Summary:</strong>{' '}
+                          {msg.classification?.reasons?.join(' ') || 'Flagged based on correlated marketplace terminology, transaction solicitation, and extracted risk heuristics.'}
+                        </div>
+
+                        {/* Extracted Signals Tags */}
+                        {signals.length > 0 && (
+                          <div className="flex items-center gap-2 pt-1 border-t border-blue-200/60">
+                            <span className="text-[10px] font-bold uppercase text-slate-500 font-mono">Signals:</span>
+                            <div className="flex flex-wrap gap-1">
                               {signals.map((sig, idx) => (
-                                <span key={idx} className="px-2 py-0.5 rounded bg-white border border-blue-200 text-blue-800 font-mono text-[10px] font-bold">
+                                <span key={idx} className="px-2 py-0.5 rounded bg-white border border-slate-300 text-slate-700 font-mono text-[10px] font-bold">
                                   {sig}
                                 </span>
                               ))}
