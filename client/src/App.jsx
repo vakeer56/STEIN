@@ -148,7 +148,8 @@ function TopBar() {
   const [health, setHealth] = useState(null);
 
   useEffect(() => {
-    fetch('/api/health')
+    const apiBase = import.meta.env.VITE_API_BASE_URL || '/api';
+    fetch(`${apiBase}/health`)
       .then((r) => r.json())
       .then(setHealth)
       .catch(() => setHealth(null));
